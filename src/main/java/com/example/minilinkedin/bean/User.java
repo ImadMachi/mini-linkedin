@@ -23,6 +23,22 @@ public class User {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     List<ReponseAnnonce> reponseAnnonces;
 
+    public List<Competence> getCompetences() {
+        return competences;
+    }
+
+    public void setCompetences(List<Competence> competences) {
+        this.competences = competences;
+    }
+
+    public List<ReponseAnnonce> getReponseAnnonces() {
+        return reponseAnnonces;
+    }
+
+    public void setReponseAnnonces(List<ReponseAnnonce> reponseAnnonces) {
+        this.reponseAnnonces = reponseAnnonces;
+    }
+
     public User() {
     }
 
