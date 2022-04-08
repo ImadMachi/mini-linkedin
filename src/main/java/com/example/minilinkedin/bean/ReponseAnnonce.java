@@ -1,9 +1,6 @@
 package com.example.minilinkedin.bean;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class ReponseAnnonce{
@@ -12,7 +9,9 @@ public class ReponseAnnonce{
     String ref;
     String refAnnonce;
     String messageReponse;
+    @ManyToOne
     User User;
+    @ManyToOne
     AnnonceEmploi annonceEmploi;
 
     public Long getId() {
