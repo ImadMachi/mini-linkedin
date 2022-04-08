@@ -4,6 +4,7 @@ import com.example.minilinkedin.bean.Competence;
 import com.example.minilinkedin.bean.User;
 import com.example.minilinkedin.dao.CompetenceDao;
 import com.example.minilinkedin.service.facade.CompetenceService;
+import com.example.minilinkedin.service.facade.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +15,10 @@ public class CompetenceServiceImpl implements CompetenceService {
     @Autowired
     private CompetenceDao competenceDao;
     @Autowired
-    private UserServiceImpl userServiceimpl;
+    private UserService userService;
 // save competence
     public int save(Competence competence) {
-        User user = userServiceimpl.findByLogin(competence.getUser().getLogin());
+        User user = userService.findByLogin(competence.getUser().getLogin());
         competence.setUser(user);
         if (competenceDao.findByLibelle(competence.getLibelle()) != null) {
             return -1;
