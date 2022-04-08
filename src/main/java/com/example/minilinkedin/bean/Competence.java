@@ -1,4 +1,4 @@
- package com.example.minilinkedin.bean;
+package com.example.minilinkedin.bean;
 
 import javax.persistence.*;
 
