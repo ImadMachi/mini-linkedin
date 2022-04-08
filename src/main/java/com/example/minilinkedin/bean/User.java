@@ -19,6 +19,10 @@ public class User {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     List<Competence> competences;
 
+    @OneToMany(mappedBy = "user")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    List<ReponseAnnonce> reponseAnnonces;
+
     public User() {
     }
 
