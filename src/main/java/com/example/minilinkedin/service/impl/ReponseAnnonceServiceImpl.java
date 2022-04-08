@@ -22,6 +22,6 @@ public class ReponseAnnonceServiceImpl implements ReponseAnnonceService {
 
     @Override
     public int save(ReponseAnnonce reponseAnnonce) {
-        return 0;
+        return 1;
     }
 }
