@@ -29,8 +29,6 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public int deleteByLogin(String login){
         User user = userDao.findByLogin(login);
-
-
         if(user == null) {
             return -1;
         } else {
@@ -41,4 +39,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private ReponseAnnonceServiceImpl reponseAnnonceServiceImpl;
 }
