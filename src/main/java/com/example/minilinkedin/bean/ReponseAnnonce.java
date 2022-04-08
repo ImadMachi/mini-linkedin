@@ -5,15 +5,14 @@ import javax.persistence.*;
 @Entity
 public class ReponseAnnonce{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String ref;
-    String refAnnonce;
-    String messageReponse;
+    private Long id;
+    private String ref;
+    private String refAnnonce;
+    private String messageReponse;
     @ManyToOne
-    User User;
+    private User User;
     @ManyToOne
-    AnnonceEmploi annonceEmploi;
-
+    private AnnonceEmploi annonceEmploi;
     public Long getId() {
 
         return id;
