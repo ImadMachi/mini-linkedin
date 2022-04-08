@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserServiceImpl implements UserService {
+
     private int validate(User user) {
         if (user.getLogin() != null) return -1;
         else if (user.getCompetences() == null || user.getCompetences().isEmpty()) return -2;
@@ -41,7 +42,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    int exec(User user) {
+    public int exec(User user) {
         int res = validate(user);
         if (res > 0) hundleProcess(user);
         return res;
@@ -62,11 +63,6 @@ public class UserServiceImpl implements UserService {
             userDao.deleteByLogin(login);
             return 1;
         }
-    }
-
-    @Override
-    public int save(User user) {
-        return 0;
     }
 
     @Autowired
