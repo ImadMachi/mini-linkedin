@@ -5,4 +5,5 @@ import com.example.minilinkedin.bean.AnnonceEmploi;
 public interface AnnonceEmploiService {
     AnnonceEmploi findByRef(String ref);
     int sauvgarder(AnnonceEmploi annonceEmploi);
+    int deleteAnnonce(AnnonceEmploi annonceEmploi);
 }
