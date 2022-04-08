@@ -23,7 +23,7 @@ public class CompetenceServiceImpl implements CompetenceService {
         if (competenceDao.findByLibelle(competence.getLibelle()) != null) {
             return -1;
         }
-        else if (user != null) {
+        else if (user == null) {
             return -2;
         }
         else {
