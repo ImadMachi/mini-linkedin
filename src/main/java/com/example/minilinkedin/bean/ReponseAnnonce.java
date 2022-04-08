@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 public class ReponseAnnonce{
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String ref;
     private String messageReponse;

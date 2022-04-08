@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 public class Competence {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String libelle;
     private String valeure;

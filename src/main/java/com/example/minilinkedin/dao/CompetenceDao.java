@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface CompetenceDao extends JpaRepository<Competence,Long> {
 
-    Competence findByLibelle(String libelle) ;
+    Competence findByLibelle(String libelle);
 
     int deleteByLibelle(String libelle);
 

@@ -27,7 +27,6 @@ public class CompetenceServiceImpl implements CompetenceService {
             return -2;
         }
         else {
-
             competenceDao.save(competence);
             return 1;
         }

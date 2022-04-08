@@ -19,9 +19,9 @@ public class User {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     List<Competence> competences;
 
-    @OneToMany(mappedBy = "user")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    List<ReponseAnnonce> reponseAnnonces;
+//    @OneToMany(mappedBy = "user")
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//    List<ReponseAnnonce> reponseAnnonces;
 
     public List<Competence> getCompetences() {
         return competences;
@@ -31,13 +31,13 @@ public class User {
         this.competences = competences;
     }
 
-    public List<ReponseAnnonce> getReponseAnnonces() {
-        return reponseAnnonces;
-    }
+//    public List<ReponseAnnonce> getReponseAnnonces() {
+//        return reponseAnnonces;
+//    }
 
-    public void setReponseAnnonces(List<ReponseAnnonce> reponseAnnonces) {
-        this.reponseAnnonces = reponseAnnonces;
-    }
+//    public void setReponseAnnonces(List<ReponseAnnonce> reponseAnnonces) {
+//        this.reponseAnnonces = reponseAnnonces;
+//    }
 
     public User() {
     }

@@ -1,13 +1,10 @@
 package com.example.minilinkedin.bean;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class AnnonceEmploi {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String ref;
     private String iceSociete;
