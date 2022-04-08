@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserServiceImpl implements UserService {
 
     private int validate(User user) {
-        if (user.getLogin() != null) return -1;
+        if (user.getLogin() == null) return -1;
         else if (user.getCompetences() == null || user.getCompetences().isEmpty()) return -2;
         else if (user.getReponseAnnonces() == null || user.getReponseAnnonces().isEmpty()) return -3;
         else return 1;
@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
     private void hundleProcess(User user) {
         userDao.save(user);
         saveCompetences(user);
-        saveReponseAnnonces(user);
+        saveReponseAnonces(user);
 
     }
 
@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    private void saveReponseAnnonces(User user) {
+    private void saveReponseAnonces(User user) {
         for (ReponseAnnonce rep : user.getReponseAnnonces()) {
             rep.setUser(user);
             reponseAnnonceService.save(rep);

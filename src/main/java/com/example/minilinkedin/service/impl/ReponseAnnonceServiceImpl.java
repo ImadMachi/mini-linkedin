@@ -22,11 +22,6 @@ public class ReponseAnnonceServiceImpl implements ReponseAnnonceService {
 
     @Override
     public int save(ReponseAnnonce reponseAnnonce) {
-        return 0;
-    }
-
-    @Override
-    public ReponseAnnonce findByRef(String ref) {
-        return null;
+        return 1;
     }
 }
