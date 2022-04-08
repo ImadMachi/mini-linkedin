@@ -12,6 +12,13 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
+   int validate(User user){
+if (user.getLogin()==null)return -1;
+else if (user.getCompetences()==null||user.getCompetences().isEmpty())return -2;
+else if (user.getReponseAnnonces()==null||user.getReponseAnnonces().isEmpty())return -3;
+else return 1;
+    }
+    
     public int save(User user) {
         User existingUser = userDao.findByLogin(user.getLogin());
         if(existingUser != null) {
