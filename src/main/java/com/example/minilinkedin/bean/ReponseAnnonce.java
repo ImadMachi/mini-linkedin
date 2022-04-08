@@ -10,7 +10,7 @@ public class ReponseAnnonce{
     private String refAnnonce;
     private String messageReponse;
     @ManyToOne
-    private User User;
+    private User user;
     @ManyToOne
     private AnnonceEmploi annonceEmploi;
     public Long getId() {
@@ -47,11 +47,11 @@ public class ReponseAnnonce{
     }
 
     public User getUser() {
-        return User;
+        return user;
     }
 
     public void setUser(User user) {
-        User = user;
+        this.user = user;
     }
 
     public AnnonceEmploi getAnnonceEmploi() {

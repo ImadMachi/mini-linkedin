@@ -8,6 +8,7 @@ import sun.jvm.hotspot.ui.tree.CStringTreeNodeAdapter;
 @Repository
 public interface AnnonceEmploiDao extends JpaRepository<AnnonceEmploi,Long> {
     AnnonceEmploi findByRef(String ref);
+
     int deleteByRef(String ref);
 
 }
