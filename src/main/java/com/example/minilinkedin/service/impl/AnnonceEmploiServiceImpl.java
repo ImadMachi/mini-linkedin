@@ -12,7 +12,7 @@ public class AnnonceEmploiServiceImpl implements AnnonceEmploiService {
 
 
     @Transactional
-    int deleteAnnonce(AnnonceEmploi annonceEmploi){
+    public int deleteAnnonce(AnnonceEmploi annonceEmploi){
         AnnonceEmploi annonce = annonceEmploiDao.findByRef(annonceEmploi.getRef());
         if (annonce == null){
             return -1;

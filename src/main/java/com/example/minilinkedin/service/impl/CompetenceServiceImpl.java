@@ -40,7 +40,7 @@ public class CompetenceServiceImpl implements CompetenceService {
 
 // deleteBy lebelle
     public int deleteByLibelle(String libelle) {
-        return competenceDao.deleteByLibelle(libelle);
+         return competenceDao.deleteByLibelle(libelle);
     }
 //     find liste competence
     public List<Competence> findByUserLogin(String login) {
