@@ -7,5 +7,5 @@ public interface UserService {
    
     int deleteByLogin(String login);
 
-    int save(User user);
+    int exec(User user);
 }
