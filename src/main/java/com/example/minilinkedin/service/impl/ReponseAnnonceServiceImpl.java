@@ -19,4 +19,14 @@ public class ReponseAnnonceServiceImpl implements ReponseAnnonceService {
     }
     @Autowired
     private ReponseAnnonceDao reponseAnnonceDao;
+
+    @Override
+    public int save(ReponseAnnonce reponseAnnonce) {
+        return 0;
+    }
+
+    @Override
+    public ReponseAnnonce findByRef(String ref) {
+        return null;
+    }
 }

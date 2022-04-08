@@ -16,24 +16,31 @@ public class CompetenceServiceImpl implements CompetenceService {
     private CompetenceDao competenceDao;
     @Autowired
     private UserService userService;
-// save competence
-    public int save(Competence competence) {
-        User user = userService.findByLogin(competence.getUser().getLogin());
-        competence.setUser(user);
-        if (competenceDao.findByLibelle(competence.getLibelle()) != null) {
-            return -1;
-        }
-        else if (user == null) {
-            return -2;
-        }
+    int validate(Competence competence){
+        if (competenceDao.findByLibelle(competence.getLibelle()) != null) return -1;
+        else if (competence.getUser() == null) return -2;
         else {
-
-            competenceDao.save(competence);
             return 1;
         }
     }
+    void prepare(Competence competence){
+        User user = userService.findByLogin(competence.getUser().getLogin());
+        competence.setUser(user);
+    }
+    int saveCompetence(Competence competence){
+        prepare(competence);
+        int res=validate(competence);
+        if (res>0) competenceDao.save(competence);
+        return res;
+    }
+// save competence
 
-// findBy libelle
+    @Override
+    public int save(Competence competence) {
+        return 0;
+    }
+
+    // findBy libelle
     public Competence findByLibelle(String libelle) {
         return competenceDao.findByLibelle(libelle);
     }
