@@ -10,13 +10,24 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class AnnonceEmploiServiceImpl implements AnnonceEmploiService {
 
+
     @Transactional
-    int deleteAnnonce(String ref){
-        AnnonceEmploi annonce = annonceEmploiDao.findByRef(ref);
+    int deleteAnnonce(AnnonceEmploi annonceEmploi){
+        AnnonceEmploi annonce = annonceEmploiDao.findByRef(annonceEmploi.getRef());
         if (annonce == null){
             return -1;
         }else{
-            annonceEmploiDao.deleteByRef(ref);
+            annonceEmploiDao.deleteByRef(annonceEmploi.getRef());
+            return 1;
+        }
+    }
+
+    int sauvgarder(AnnonceEmploi annonceEmploi){
+        AnnonceEmploi annonce =annonceEmploiDao.findByRef(annonceEmploi.getRef());
+        if (annonce !=null){
+            return -1;
+        }else{
+            annonceEmploiDao.save(annonce);
             return 1;
         }
     }
