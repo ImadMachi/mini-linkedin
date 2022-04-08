@@ -22,7 +22,7 @@ public class AnnonceEmploiServiceImpl implements AnnonceEmploiService {
         }
     }
 
-    int sauvgarder(AnnonceEmploi annonceEmploi){
+    public int sauvgarder(AnnonceEmploi annonceEmploi){
         AnnonceEmploi annonce =annonceEmploiDao.findByRef(annonceEmploi.getRef());
         if (annonce !=null){
             return -1;
@@ -35,6 +35,7 @@ public class AnnonceEmploiServiceImpl implements AnnonceEmploiService {
     public AnnonceEmploi findByRef(String ref) {
         return annonceEmploiDao.findByRef(ref);
     }
+
 
     public int deleteByRef(String ref) {
         return annonceEmploiDao.deleteByRef(ref);
