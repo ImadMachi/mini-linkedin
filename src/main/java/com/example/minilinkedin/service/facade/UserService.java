@@ -6,4 +6,6 @@ public interface UserService {
     User findByLogin(String login);
 
     int deleteByLogin(String login);
+
+    int save(User user);
 }

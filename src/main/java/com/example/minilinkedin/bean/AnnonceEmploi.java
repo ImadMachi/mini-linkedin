@@ -13,9 +13,7 @@ public class AnnonceEmploi {
     private String iceSociete;
     private String titreOffre;
     private String  descriptionOffre;
-    @OneToMany (mappedBy = "annonceEmploi")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    List<ReponseAnnonce> reponseAnnonces;
+
 
     public AnnonceEmploi() {
     }
@@ -60,11 +58,5 @@ public class AnnonceEmploi {
         this.descriptionOffre = descriptionOffre;
     }
 
-    public List<ReponseAnnonce> getReponseAnnonceEmplois() {
-        return reponseAnnonces;
-    }
 
-    public void setReponseAnnonceEmplois(List<ReponseAnnonce> reponseAnnonceEmplois) {
-        this.reponseAnnonces = reponseAnnonceEmplois;
-    }
 }
