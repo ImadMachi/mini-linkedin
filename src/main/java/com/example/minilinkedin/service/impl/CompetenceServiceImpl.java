@@ -26,6 +26,7 @@ public class CompetenceServiceImpl implements CompetenceService {
             return -2;
         }
         else {
+
             return 1;
         }
     }
