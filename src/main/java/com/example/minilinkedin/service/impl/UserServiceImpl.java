@@ -39,6 +39,7 @@ else return 1;
         if(user == null) {
             return -1;
         } else {
+            user.getReponseAnnonces().forEach(e-> reponseAnnonceServiceImpl.deleteByUserLogin(e.getUser().getLogin()));
             userDao.deleteByLogin(login);
             return 1;
         }
