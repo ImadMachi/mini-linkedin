@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 public class UserServiceImpl implements UserService {
     private int validate(User user) {
@@ -59,7 +57,8 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             return -1;
         } else {
-            user.getReponseAnnonces().forEach(e -> reponseAnnonceServiceImpl.deleteByUserLogin(e.getUser().getLogin()));
+            user.getReponseAnnonces().forEach(e -> reponseAnnonceService.deleteByUserLogin(e.getUser().getLogin()));
+            user.getCompetences().forEach(e -> competenceService.deleteByUserLogin(e.getUser().getLogin()));
             userDao.deleteByLogin(login);
             return 1;
         }
@@ -71,12 +70,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Autowired
-    private ReponseAnnonceService reponseAnnonceService;
-    @Autowired
     private CompetenceService competenceService;
     @Autowired
-    private UserDao userDao;
-
+    private ReponseAnnonceService reponseAnnonceService;
     @Autowired
-    private ReponseAnnonceServiceImpl reponseAnnonceServiceImpl;
+    private UserDao userDao;
 }
