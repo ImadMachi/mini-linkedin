@@ -3,7 +3,6 @@ package com.example.minilinkedin.service.impl;
 import com.example.minilinkedin.bean.Competence;
 import com.example.minilinkedin.bean.User;
 import com.example.minilinkedin.dao.CompetenceDao;
-import com.example.minilinkedin.service.UserServiceImpl;
 import com.example.minilinkedin.service.facade.CompetenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
