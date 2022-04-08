@@ -1,0 +1,66 @@
+package com.example.minilinkedin.bean;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class ReponseAnnonce{
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
+    String ref;
+    String refAnnonce;
+    String messageReponse;
+    User User;
+    AnnonceEmploi annonceEmploi;
+
+    public Long getId() {
+
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getRef() {
+        return ref;
+    }
+
+    public void setRef(String ref) {
+        this.ref = ref;
+    }
+
+    public String getRefAnnonce() {
+        return refAnnonce;
+    }
+
+    public void setRefAnnonce(String refAnnonce) {
+        this.refAnnonce = refAnnonce;
+    }
+
+    public String getMessageReponse() {
+        return messageReponse;
+    }
+
+    public void setMessageReponse(String messageReponse) {
+        this.messageReponse = messageReponse;
+    }
+
+    public User getUser() {
+        return User;
+    }
+
+    public void setUser(User user) {
+        User = user;
+    }
+
+    public AnnonceEmploi getAnnonceEmploi() {
+        return annonceEmploi;
+    }
+
+    public void setAnnonceEmploi(AnnonceEmploi annonceEmploi) {
+        this.annonceEmploi = annonceEmploi;
+    }
+}
