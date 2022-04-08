@@ -21,6 +21,11 @@ public class ReponseAnnonceServiceImpl implements ReponseAnnonceService {
     public int deleteByUserLogin(String login) {
         return reponseAnnonceDao.deleteByUserLogin(login);
     }
+
+    public ReponseAnnonce findByRef(String ref){
+        return reponseAnnonceDao.findByRef(ref);
+    }
+
     @Autowired
     private ReponseAnnonceDao reponseAnnonceDao;
 
