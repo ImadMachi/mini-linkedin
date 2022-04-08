@@ -11,6 +11,10 @@ import java.util.List;
 @Service
 public class ReponseAnnonceServiceImpl implements ReponseAnnonceService {
 
+    public int save(ReponseAnnonce reponseAnnonce) {
+        reponseAnnonceDao.save(reponseAnnonce);
+        return 1;
+    }
     public List<ReponseAnnonce> findByUserLogin(String login){
         return reponseAnnonceDao.findByUserLogin(login);
     }
@@ -20,8 +24,4 @@ public class ReponseAnnonceServiceImpl implements ReponseAnnonceService {
     @Autowired
     private ReponseAnnonceDao reponseAnnonceDao;
 
-    @Override
-    public int save(ReponseAnnonce reponseAnnonce) {
-        return 1;
-    }
 }

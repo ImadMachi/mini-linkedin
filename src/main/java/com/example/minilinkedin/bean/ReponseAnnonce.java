@@ -7,7 +7,6 @@ public class ReponseAnnonce{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String ref;
-    private String refAnnonce;
     private String messageReponse;
     @ManyToOne
     private User user;
@@ -28,14 +27,6 @@ public class ReponseAnnonce{
 
     public void setRef(String ref) {
         this.ref = ref;
-    }
-
-    public String getRefAnnonce() {
-        return refAnnonce;
-    }
-
-    public void setRefAnnonce(String refAnnonce) {
-        this.refAnnonce = refAnnonce;
     }
 
     public String getMessageReponse() {
