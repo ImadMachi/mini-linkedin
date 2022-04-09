@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/user")
 public class UserRest {
+    @PostMapping("/sign-in")
+    public String signIn(@RequestBody User user) {
+        return userService.signIn(user);
+    }
+
     @PostMapping("/")
     public int exec(@RequestBody User user) {
         return userService.exec(user);

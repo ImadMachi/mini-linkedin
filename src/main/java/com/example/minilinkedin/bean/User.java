@@ -1,19 +1,33 @@
 package com.example.minilinkedin.bean;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
-    String login;
-    String password;
-    String nom;
-    String prenom;
+    private Long id;
+    private String login;
+    private String password;
+    private String username;
+    private String prenom;
+    private boolean accountNonExpired = true;
+    private boolean accountNonLocked = true;
+    private boolean credentialsNonExpired = true;
+    private boolean enabled = true;
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public User() {
+    }
 
     @OneToMany(mappedBy = "user")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -22,25 +36,8 @@ public class User {
     @OneToMany(mappedBy = "user")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     List<ReponseAnnonce> reponseAnnonces;
-
-    public List<Competence> getCompetences() {
-        return competences;
-    }
-
-    public void setCompetences(List<Competence> competences) {
-        this.competences = competences;
-    }
-
-    public List<ReponseAnnonce> getReponseAnnonces() {
-        return reponseAnnonces;
-    }
-
-    public void setReponseAnnonces(List<ReponseAnnonce> reponseAnnonces) {
-        this.reponseAnnonces = reponseAnnonces;
-    }
-
-    public User() {
-    }
+    @ManyToMany
+    private Collection<Role> authorities;
 
     public Long getId() {
         return id;
@@ -58,6 +55,7 @@ public class User {
         this.login = login;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
@@ -66,12 +64,13 @@ public class User {
         this.password = password;
     }
 
-    public String getNom() {
-        return nom;
+    @Override
+    public String getUsername() {
+        return username;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPrenom() {
@@ -80,5 +79,66 @@ public class User {
 
     public void setPrenom(String prenom) {
         this.prenom = prenom;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return accountNonExpired;
+    }
+
+    public void setAccountNonExpired(boolean accountNonExpired) {
+        this.accountNonExpired = accountNonExpired;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return accountNonLocked;
+    }
+
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        this.accountNonLocked = accountNonLocked;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return credentialsNonExpired;
+    }
+
+    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+        this.credentialsNonExpired = credentialsNonExpired;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public List<Competence> getCompetences() {
+        return competences;
+    }
+
+    public void setCompetences(List<Competence> competences) {
+        this.competences = competences;
+    }
+
+    public List<ReponseAnnonce> getReponseAnnonces() {
+        return reponseAnnonces;
+    }
+
+    public void setReponseAnnonces(List<ReponseAnnonce> reponseAnnonces) {
+        this.reponseAnnonces = reponseAnnonces;
+    }
+
+    @Override
+    public Collection<Role> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Collection<Role> authorities) {
+        this.authorities = authorities;
     }
 }

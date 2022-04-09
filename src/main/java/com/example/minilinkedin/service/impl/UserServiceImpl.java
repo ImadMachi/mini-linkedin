@@ -5,29 +5,58 @@ import com.example.minilinkedin.bean.Competence;
 import com.example.minilinkedin.bean.ReponseAnnonce;
 import com.example.minilinkedin.bean.User;
 import com.example.minilinkedin.dao.UserDao;
-import com.example.minilinkedin.service.facade.AnnonceEmploiService;
-import com.example.minilinkedin.service.facade.CompetenceService;
-import com.example.minilinkedin.service.facade.ReponseAnnonceService;
-import com.example.minilinkedin.service.facade.UserService;
+import com.example.minilinkedin.service.facade.*;
+import com.example.minilinkedin.service.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserServiceImpl implements UserService {
 
+    @Override
+    public String signIn(User user) {
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                    user.getUsername(), user.getPassword()
+            ));
+        } catch (BadCredentialsException e) {
+            throw new BadCredentialsException("bad creditiel for username " + user.getUsername());
+        }
+        User loadUserByUsername = loadUserByUsername(user.getUsername());
+        String token = jwtUtil.generateToken(loadUserByUsername);
+        return token;
+    }
+
+    @Override
+    public User loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userDao.findByUsername(username);
+        if (user == null || user.getId() == null) {
+            throw new UsernameNotFoundException("user " + username + " not founded");
+        } else {
+            return user;
+        }
+    }
+
     private int validate(User user) {
         if (user.getLogin() == null) return -1;
         else if (userDao.findByLogin(user.getLogin()) != null) return -2;
         else if (user.getCompetences() == null || user.getCompetences().isEmpty()) return -3;
-//        else if (user.getReponseAnnonces() == null || user.getReponseAnnonces().isEmpty()) return -4;
+        else if (userDao.findByUsername(user.getUsername()) != null) return -4;
+
         else return 1;
     }
 
     private void hundleProcess(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        roleService.save(user.getAuthorities());
         userDao.save(user);
         saveCompetences(user);
-//        saveReponseAnonces(user);
     }
 
     private void saveCompetences(User user) {
@@ -37,20 +66,6 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-//    private void saveReponseAnonces(User user) {
-//        for (ReponseAnnonce rep : user.getReponseAnnonces()) {
-//            rep.setUser(user);
-//            saveAnonceEmploi(rep);
-//            AnnonceEmploi annonceEmploi = annonceEmploiService.findByRef(rep.getAnnonceEmploi().getRef());
-//            rep.setAnnonceEmploi(annonceEmploi);
-//            reponseAnnonceService.save(rep);
-//        }
-//    }
-
-//    public void saveAnonceEmploi(ReponseAnnonce reponseAnnonce) {
-//        annonceEmploiService.sauvgarder(reponseAnnonce.getAnnonceEmploi());
-//    }
-
     public int exec(User user) {
         int res = validate(user);
         if (res > 0) hundleProcess(user);
@@ -58,7 +73,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public void update(User user) {
-        if(userDao.findByLogin(user.getLogin()) != null) {
+        if (userDao.findByLogin(user.getLogin()) != null) {
             userDao.save(user);
         }
     }
@@ -81,6 +96,14 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Autowired
+    private RoleService roleService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    @Autowired
+    private JwtUtil jwtUtil;
     @Autowired
     private CompetenceService competenceService;
     @Autowired
