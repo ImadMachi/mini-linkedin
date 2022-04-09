@@ -10,5 +10,4 @@ public interface AnnonceEmploiDao extends JpaRepository<AnnonceEmploi,Long> {
     AnnonceEmploi findByRef(String ref);
 
     int deleteByRef(String ref);
-
 }

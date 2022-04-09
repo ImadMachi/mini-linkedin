@@ -12,26 +12,30 @@ import java.util.List;
 public class CompetenceRest {
     @PostMapping("/")
     public int save(@RequestBody Competence competence) {
-        return competenceService.save(competence);
+        return competenceService.saveCompetence(competence);
     }
-@GetMapping("/libelle/{libelle}")
+
+    @GetMapping("/libelle/{libelle}")
     public Competence findByLibelle(@PathVariable String libelle) {
         return competenceService.findByLibelle(libelle);
     }
-@DeleteMapping("/libelle/{libelle}")
+
+    @DeleteMapping("/libelle/{libelle}")
     public int deleteByLibelle(@PathVariable String libelle) {
         return competenceService.deleteByLibelle(libelle);
     }
-@GetMapping("/user/login")
+
+    @GetMapping("/user/login/{login}")
     public List<Competence> findByUserLogin(@PathVariable String login) {
         return competenceService.findByUserLogin(login);
     }
-@DeleteMapping("/user/login/{login}")
+
+    @DeleteMapping("/user/login/{login}")
     public int deleteByUserLogin(@PathVariable String login) {
         return competenceService.deleteByUserLogin(login);
     }
 
     @Autowired
-   private CompetenceService competenceService;
+    private CompetenceService competenceService;
 
 }

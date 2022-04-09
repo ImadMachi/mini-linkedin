@@ -7,5 +7,7 @@ public interface UserService {
    
     int deleteByLogin(String login);
 
+    void update(User user);
+
     int exec(User user);
 }

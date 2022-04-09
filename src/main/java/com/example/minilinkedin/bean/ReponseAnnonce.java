@@ -7,7 +7,7 @@ public class ReponseAnnonce{
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String ref;
-    private String messageReponse;
+        private String messageReponse;
     @ManyToOne
     private User user;
     @ManyToOne

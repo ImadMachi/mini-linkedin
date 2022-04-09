@@ -10,5 +10,6 @@ import java.util.List;
 public interface ReponseAnnonceDao extends JpaRepository<ReponseAnnonce,Long> {
     ReponseAnnonce findByRef(String ref);
     List<ReponseAnnonce> findByUserLogin(String login);
+    int deleteByRef(String ref);
     int deleteByUserLogin(String login);
 }

@@ -7,6 +7,7 @@ import com.example.minilinkedin.service.facade.CompetenceService;
 import com.example.minilinkedin.service.facade.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,36 +17,47 @@ public class CompetenceServiceImpl implements CompetenceService {
     private CompetenceDao competenceDao;
     @Autowired
     private UserService userService;
-// save competence
-    public int save(Competence competence) {
-        User user = userService.findByLogin(competence.getUser().getLogin());
-        competence.setUser(user);
-        if (competenceDao.findByLibelle(competence.getLibelle()) != null) {
-            return -1;
-        }
-        else if (user == null) {
-            return -2;
-        }
+
+    // save competence
+    private int validate(Competence competence) {
+        if (competenceDao.findByLibelle(competence.getLibelle()) != null) return -1;
+        else if (competence.getUser() == null) return -2;
         else {
-            competenceDao.save(competence);
             return 1;
         }
     }
 
-// findBy libelle
+    private void prepare(Competence competence) {
+        User user = userService.findByLogin(competence.getUser().getLogin());
+        competence.setUser(user);
+    }
+
+    // save competence
+    public int saveCompetence(Competence competence) {
+        prepare(competence);
+        int res = validate(competence);
+        if (res > 0) competenceDao.save(competence);
+        return res;
+    }
+
+    // findBy libelle
     public Competence findByLibelle(String libelle) {
         return competenceDao.findByLibelle(libelle);
     }
 
-// deleteBy lebelle
+    // deleteBy lebelle
+    @Transactional
     public int deleteByLibelle(String libelle) {
-         return competenceDao.deleteByLibelle(libelle);
+        return competenceDao.deleteByLibelle(libelle);
     }
-//     find liste competence
+
+    //     find liste competence
     public List<Competence> findByUserLogin(String login) {
         return competenceDao.findByUserLogin(login);
     }
-// delete liste competence
+
+    // delete liste competence
+    @Transactional
     public int deleteByUserLogin(String login) {
         return competenceDao.deleteByUserLogin(login);
     }

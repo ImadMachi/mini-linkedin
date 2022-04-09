@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
     private void saveCompetences(User user) {
         for (Competence c : user.getCompetences()) {
             c.setUser(user);
-            competenceService.save(c);
+            competenceService.saveCompetence(c);
         }
     }
 
@@ -57,6 +57,12 @@ public class UserServiceImpl implements UserService {
         return res;
     }
 
+    public void update(User user) {
+        if(userDao.findByLogin(user.getLogin()) != null) {
+            userDao.save(user);
+        }
+    }
+
     public User findByLogin(String login) {
         return userDao.findByLogin(login);
     }
@@ -67,10 +73,11 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             return -1;
         } else {
-//            user.getReponseAnnonces().forEach(e -> reponseAnnonceService.deleteByUserLogin(e.getUser().getLogin()));
-            user.getCompetences().forEach(e -> competenceService.deleteByUserLogin(e.getUser().getLogin()));
-            userDao.deleteByLogin(login);
-            return 1;
+            int res = 0;
+            res += reponseAnnonceService.deleteByUserLogin(user.getLogin());
+            res += competenceService.deleteByUserLogin(user.getLogin());
+            res += userDao.deleteByLogin(login);
+            return res;
         }
     }
 

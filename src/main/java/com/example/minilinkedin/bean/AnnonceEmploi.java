@@ -4,12 +4,13 @@ import javax.persistence.*;
 
 @Entity
 public class AnnonceEmploi {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String ref;
     private String iceSociete;
     private String titreOffre;
-    private String  descriptionOffre;
+    private String descriptionOffre;
 
 
     public AnnonceEmploi() {
